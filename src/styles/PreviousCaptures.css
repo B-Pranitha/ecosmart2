@@ -1,0 +1,105 @@
+/* src/styles/PreviousCaptures.css */
+.captures-page-container {
+  min-height: 100vh;
+  background: url('C:/Users/PRANITHA/ecosmart2/public/control-de-emisiones-industriales.jpg') no-repeat center center fixed;
+  background-size: cover;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.captures-page-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 0;
+}
+
+.captures-container {
+  padding: 40px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  width: 90%;
+  max-width: 1000px;
+}
+
+.captures-container h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 38px;
+  color: #1a3c34; /* Dark green as per previous request */
+  margin-bottom: 35px;
+  letter-spacing: 1.5px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.captures-list {
+  max-height: 400px;
+  overflow-y: auto;
+  width: 100%;
+  margin-bottom: 40px;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.capture-item {
+  background: #ffffff;
+  padding: 15px 20px;
+  margin: 15px 0;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.capture-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.capture-item span {
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+  color: #000000;
+}
+
+.chart {
+  max-width: 1000px;
+  width: 100%;
+  height: 450px;
+  margin: 0 auto;
+  padding: 25px;
+  background: rgba(255, 255, 255, 0.98); /* Slightly more opaque */
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25); /* Deeper shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(39, 174, 96, 0.2); /* Subtle green border */
+}
+
+.chart:hover {
+  transform: scale(1.03); /* Slightly larger scale on hover */
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* Scrollbar Styling */
+.captures-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.captures-list::-webkit-scrollbar-thumb {
+  background: #27ae60;
+  border-radius: 10px;
+}
+
+.captures-list::-webkit-scrollbar-track {
+  background: #ecf0f1;
+}

@@ -1,0 +1,216 @@
+/* src/styles/Home.css */
+.home-container {
+  height: 100vh;
+  background: url('C:/Users/PRANITHA/ecosmart2/public/control-de-emisiones-industriales.jpg') no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;/* src/styles/Home.css */
+  /* ... (existing styles remain unchanged) */
+  
+  /* Add these at the bottom if not already present */
+  .loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    color: #27ae60;
+    z-index: 2;
+  }
+  
+  .error {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    color: #e74c3c;
+    text-align: center;
+    z-index: 2;
+  }
+  position: relative;
+  overflow: hidden;
+}
+
+/* Add a subtle overlay for better contrast */
+.home-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 0;
+}
+
+.content {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 35px;
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  width: 750px;
+  color: #000;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s ease;
+}
+
+.content:hover {
+  transform: scale(1.02);
+}
+
+.meters {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 25px;
+}
+
+.meter {
+  text-align: center;
+  width: 220px;
+}
+
+.meter h3 {
+  color: #2c3e50;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+/* Highlighted Current Process Section */
+.current-process-highlight {
+  background: rgba(39, 174, 96, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  margin-bottom: 25px;
+  transition: all 0.3s ease;
+}
+
+.current-process-highlight:hover {
+  background: rgba(39, 174, 96, 0.2);
+  transform: translateY(-5px);
+}
+
+.current-process {
+  text-align: center;
+}
+
+.current-process h3 {
+  color: #27ae60;
+  font-size: 20px;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.process-tracker {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  margin-top: 20px;
+}
+
+.process-step {
+  text-align: center;
+  flex: 1;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s ease;
+}
+
+.process-step:hover {
+  transform: scale(1.1);
+}
+
+.process-step span {
+  display: block;
+  color: #34495e;
+  font-size: 15px;
+  margin-top: 5px;
+}
+
+.step-circle {
+  width: 35px;
+  height: 35px;
+  background: #ccc;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 8px;
+  font-size: 18px;
+  transition: all 0.3s ease;
+}
+
+.process-step.active .step-circle {
+  background: #27ae60;
+}
+
+.process-step.current .step-circle {
+  background: #e74c3c;
+  box-shadow: 0 0 10px rgba(231, 76, 60, 0.7);
+  animation: pulse 1.5s infinite;
+}
+
+.process-tracker::before {
+  content: '';
+  position: absolute;
+  top: 17px;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: #ccc;
+  z-index: 0;
+}
+
+.process-tracker::after {
+  content: '';
+  position: absolute;
+  top: 17px;
+  left: 0;
+  width: var(--progress-width, 0%);
+  height: 5px;
+  background: #27ae60;
+  z-index: 0;
+  transition: width 0.5s ease;
+}
+
+
+.sections {
+  display: flex;
+  justify-content: space-around;
+}
+
+.section {
+  padding: 15px 35px;
+  background: #3498db;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.section:hover {
+  background: #2980b9;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Animations */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(231, 76, 60, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(231, 76, 60, 0);
+  }
+}

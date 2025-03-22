@@ -1,0 +1,129 @@
+/* src/styles/Recommendations.css */
+.recommendations-page-container {
+  min-height: 100vh;
+  background: url('C:/Users/PRANITHA/ecosmart2/public/control-de-emisiones-industriales.jpg') no-repeat center center fixed;
+  background-size: cover;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.recommendations-page-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(191, 227, 215, 0.2);
+  z-index: 0;
+}
+
+.recommendations-container {
+  padding: 40px;
+  position: relative;
+  z-index: 1;
+  width: 90%;
+  max-width: 1200px;
+}
+
+.recommendations-title {
+  font-size: 2.5rem;
+  color: #000000; /* Remains black */
+  margin-bottom: 40px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.recommendations-title::after {
+  content: '';
+  width: 60px;
+  height: 4px;
+  background: #27ae60;
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.recommendations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.recommendation-card {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+.recommendation-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.card-title {
+  font-size: 1.6rem;
+  color: #27ae60; /* Reverted to green for "Enhanced Oil Recovery (EOR)" */
+  margin-bottom: 12px;
+}
+
+.card-description {
+  font-size: 1rem;
+  color: #000000; /* Remains black for "Use captured CO2 for enhanced oil recovery" */
+  margin-bottom: 15px;
+}
+
+.card-details {
+  font-size: 0.95rem;
+  color: #000000; /* Remains black */
+  max-height: 0;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.recommendation-card.expanded .card-details {
+  max-height: 100px;
+  opacity: 1;
+}
+
+.recommendation-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: #27ae60;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.recommendation-card:hover::before {
+  transform: scaleX(1);
+}
+
+@media (max-width: 768px) {
+  .recommendations-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .recommendations-title {
+    font-size: 2rem;
+  }
+
+  .recommendation-card {
+    padding: 20px;
+  }
+}
