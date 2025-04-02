@@ -1,79 +1,53 @@
-// src/components/Home.js
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import GaugeChart from 'react-gauge-chart';
-import '../styles/Home.css';
-import { initializeApp } from 'firebase/app';
-import { getDatabase, ref, onValue } from 'firebase/database';
-
-// Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyDdgnpxd3ZsLUn0Cvwc1MkYFuhfYBpID1I",
-  authDomain: "ecosmart-54ac6.firebaseapp.com",
-  databaseURL: "https://ecosmart-54ac6-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "ecosmart-54ac6",
-  storageBucket: "ecosmart-54ac6.firebasestorage.app",
-  messagingSenderId: "834837781787",
-  appId: "1:834837781787:web:e07308f1c887beab7b87be",
-  measurementId: "G-HE4FYZCJGB"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import GaugeChart from "react-gauge-chart";
+import "../styles/Home.css";
+import { db } from "../firebase"; // Import db from firebase.js
+import { ref, onValue } from "firebase/database";
 
 const Home = () => {
   const navigate = useNavigate();
-  
-  // State for Firebase data
-  const [pressure, setPressure] = useState(900); // Default value
-  const [ph, setPh] = useState(0); // Default value
-  const [temperature, setTemperature] = useState(0); // Default value
-  const [pump1Status, setPump1Status] = useState('OFF');
-  const [pump2Status, setPump2Status] = useState('OFF');
+  const [pressure, setPressure] = useState(900);
+  const [ph, setPh] = useState(0);
+  const [temperature, setTemperature] = useState(0);
+  const [pump1Status, setPump1Status] = useState("OFF");
+  const [pump2Status, setPump2Status] = useState("OFF");
 
-  // Fetch data from Firebase
   useEffect(() => {
-    const dataRef = ref(db, 'EcoSmart');
-    const unsubscribe = onValue(dataRef, (snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        setPressure(data.Pressure || 900);
-        setPh(data.pH || 0);
-        setTemperature(data.Temperature || 0);
-        setPump1Status(data.Pump1_Status || 'OFF');
-        setPump2Status(data.Pump2_Status || 'OFF');
+    const dataRef = ref(db, "EcoSmart");
+    onValue(
+      dataRef,
+      (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+          setPressure(data.Pressure || 900);
+          setPh(data.pH || 0);
+          setTemperature(data.Temperature || 0);
+          setPump1Status(data.Pump1_Status || "OFF");
+          setPump2Status(data.Pump2_Status || "OFF");
+        }
+      },
+      (error) => {
+        console.error("Error fetching Firebase data:", error);
       }
-    }, (error) => {
-      console.error("Error fetching Firebase data:", error);
-    });
-
-    return () => unsubscribe();
+    );
   }, []);
 
-  // Calculate gauge percentages (normalize values to 0-1)
-  const pressurePercent = (pressure - 900) / (1100 - 900); // Range: 900-1100 hPa
-  const phPercent = ph / 14; // Range: 0-14
-  const tempPercent = (temperature - 0) / (50 - 0); // Assuming range: 0-50°C, adjust as needed
+  const pressurePercent = (pressure - 900) / (1100 - 900);
+  const phPercent = ph / 14;
+  const tempPercent = (temperature - 0) / (50 - 0);
 
-  // Determine current process based on pump status
   const determineCurrentProcess = () => {
-    if (pump1Status === 'ON') {
-      return 'Collecting CO2 and Reaction Phase';
-    } else if (pump2Status === 'ON') {
-      return 'Collecting End Product';
-    } else {
-      return 'Detecting CO2'; // Default when both pumps are OFF
-    }
+    if (pump1Status === "ON") return "Collecting CO2 and Reaction Phase";
+    if (pump2Status === "ON") return "Collecting End Product";
+    return "Detecting CO2";
   };
 
   const currentProcess = determineCurrentProcess();
-
-  // Process steps and current step logic
   const processes = [
-    'Detecting CO2',
-    'Collecting CO2 and Reaction Phase',
-    'Collecting End Product'
+    "Detecting CO2",
+    "Collecting CO2 and Reaction Phase",
+    "Collecting End Product",
   ];
   const currentStep = processes.indexOf(currentProcess);
 
@@ -89,7 +63,7 @@ const Home = () => {
               percent={pressurePercent}
               arcWidth={0.3}
               needleColor="#000"
-              colors={['#FF0000', '#FFFF00', '#00FF00']}
+              colors={["#FF0000", "#FFFF00", "#00FF00"]}
               textColor="#000"
               formatTextValue={() => `${pressure.toFixed(2)} hPa`}
             />
@@ -102,7 +76,7 @@ const Home = () => {
               percent={phPercent}
               arcWidth={0.3}
               needleColor="#000"
-              colors={['#FF0000', '#FFFF00', '#00FF00']}
+              colors={["#FF0000", "#FFFF00", "#00FF00"]}
               textColor="#000"
               formatTextValue={() => `${ph.toFixed(2)}`}
             />
@@ -115,7 +89,7 @@ const Home = () => {
               percent={tempPercent}
               arcWidth={0.3}
               needleColor="#000"
-              colors={['#FF0000', '#FFFF00', '#00FF00']}
+              colors={["#FF0000", "#FFFF00", "#00FF00"]}
               textColor="#000"
               formatTextValue={() => `${temperature.toFixed(2)} °C`}
             />
@@ -128,11 +102,13 @@ const Home = () => {
               {processes.map((process, index) => (
                 <div
                   key={index}
-                  className={`process-step ${index <= currentStep ? 'active' : ''} ${
-                    index === currentStep ? 'current' : ''
-                  }`}
+                  className={`process-step ${
+                    index <= currentStep ? "active" : ""
+                  } ${index === currentStep ? "current" : ""}`}
                 >
-                  <div className="step-circle">{index < currentStep ? '✔' : index + 1}</div>
+                  <div className="step-circle">
+                    {index < currentStep ? "✔" : index + 1}
+                  </div>
                   <span>{process}</span>
                 </div>
               ))}
@@ -140,10 +116,13 @@ const Home = () => {
           </div>
         </div>
         <div className="sections">
-          <div className="section" onClick={() => navigate('/previous-captures')}>
+          <div
+            className="section"
+            onClick={() => navigate("/previous-captures")}
+          >
             Previous Captures
           </div>
-          <div className="section" onClick={() => navigate('/recommendations')}>
+          <div className="section" onClick={() => navigate("/recommendations")}>
             Recommendations
           </div>
         </div>
