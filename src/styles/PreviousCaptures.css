@@ -1,7 +1,7 @@
 /* src/styles/PreviousCaptures.css */
 .captures-page-container {
   min-height: 100vh;
-  background: url('C:/Users/PRANITHA/ecosmart2/public/control-de-emisiones-industriales.jpg') no-repeat center center fixed;
+  background: url('C:/Users/PRANITHA/ecosmart2/public/control-de-emisiones-industriales.jpg') no-repeat center center fixed; /* Updated path */
   background-size: cover;
   position: relative;
   display: flex;
@@ -32,14 +32,14 @@
 .captures-container h2 {
   font-family: 'Playfair Display', serif;
   font-size: 38px;
-  color: #1a3c34; /* Dark green as per previous request */
+  color: white; /* Dark green */
   margin-bottom: 35px;
   letter-spacing: 1.5px;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .captures-list {
-  max-height: 400px;
+  max-height: 300px; /* Reduced slightly to balance with graph */
   overflow-y: auto;
   width: 100%;
   margin-bottom: 40px;
@@ -52,13 +52,15 @@
 .capture-item {
   background: #ffffff;
   padding: 15px 20px;
-  margin: 15px 0;
+  margin: 10px 0;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap; /* Added for responsiveness */
+  gap: 15px; /* Spacing between items */
 }
 
 .capture-item:hover {
@@ -70,23 +72,25 @@
   font-family: 'Lato', sans-serif;
   font-size: 16px;
   color: #000000;
+  flex: 1; /* Ensures even distribution */
+  min-width: 200px; /* Prevents items from getting too cramped */
 }
 
 .chart {
   max-width: 1000px;
   width: 100%;
-  height: 450px;
+  height: 500px; /* Increased slightly for better visibility of 3 lines */
   margin: 0 auto;
   padding: 25px;
-  background: rgba(255, 255, 255, 0.98); /* Slightly more opaque */
+  background: rgba(255, 255, 255, 0.98);
   border-radius: 15px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25); /* Deeper shadow */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: 1px solid rgba(39, 174, 96, 0.2); /* Subtle green border */
+  border: 1px solid rgba(39, 174, 96, 0.2);
 }
 
 .chart:hover {
-  transform: scale(1.03); /* Slightly larger scale on hover */
+  transform: scale(1.03);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
 }
 
@@ -102,4 +106,35 @@
 
 .captures-list::-webkit-scrollbar-track {
   background: #ecf0f1;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .captures-container {
+    padding: 20px;
+  }
+
+  .captures-container h2 {
+    font-size: 28px;
+    margin-bottom: 25px;
+  }
+
+  .captures-list {
+    max-height: 250px;
+  }
+
+  .capture-item {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 15px;
+  }
+
+  .capture-item span {
+    font-size: 14px;
+    min-width: unset; /* Remove min-width for smaller screens */
+  }
+
+  .chart {
+    height: 400px; /* Adjust height for smaller screens */
+  }
 }

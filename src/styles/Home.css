@@ -1,35 +1,12 @@
 /* src/styles/Home.css */
 .home-container {
   height: 100vh;
-  background: url('C:/Users/PRANITHA/ecosmart2/public/control-de-emisiones-industriales.jpg') no-repeat center center fixed;
+  background: url('C:/Users/PRANITHA/ecosmart2/public/control-de-emisiones-industriales.jpg') no-repeat center center fixed; /* Updated path */
   background-size: cover;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;/* src/styles/Home.css */
-  /* ... (existing styles remain unchanged) */
-  
-  /* Add these at the bottom if not already present */
-  .loading {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 20px;
-    color: #27ae60;
-    z-index: 2;
-  }
-  
-  .error {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 20px;
-    color: #e74c3c;
-    text-align: center;
-    z-index: 2;
-  }
+  justify-content: center;
   position: relative;
   overflow: hidden;
 }
@@ -51,7 +28,7 @@
   padding: 35px;
   border-radius: 15px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-  width: 750px;
+  width: 850px; /* Increased slightly to accommodate three gauges */
   color: #000;
   position: relative;
   z-index: 1;
@@ -66,11 +43,13 @@
   display: flex;
   justify-content: space-around;
   margin-bottom: 25px;
+  flex-wrap: wrap; /* Added to handle smaller screens */
+  gap: 20px; /* Added for consistent spacing */
 }
 
 .meter {
   text-align: center;
-  width: 220px;
+  width: 220px; /* Kept the same, but flex-wrap ensures responsiveness */
 }
 
 .meter h3 {
@@ -131,6 +110,8 @@
   color: #34495e;
   font-size: 15px;
   margin-top: 5px;
+  word-wrap: break-word; /* Added to handle longer process names */
+  max-width: 100%; /* Ensures text stays within bounds */
 }
 
 .step-circle {
@@ -173,13 +154,12 @@
   position: absolute;
   top: 17px;
   left: 0;
-  width: var(--progress-width, 0%);
+  width: 66%; /* This could be dynamic based on currentStep, but kept static for simplicity */
   height: 5px;
   background: #27ae60;
   z-index: 0;
   transition: width 0.5s ease;
 }
-
 
 .sections {
   display: flex;
@@ -212,5 +192,40 @@
   }
   100% {
     box-shadow: 0 0 0 0 rgba(231, 76, 60, 0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .content {
+    width: 90%; /* Adjust width for smaller screens */
+    padding: 20px;
+  }
+
+  .meter {
+    width: 100%; /* Full width on small screens */
+    max-width: 220px; /* Keep a max width */
+    margin: 10px auto; /* Center meters */
+  }
+
+  .process-step span {
+    font-size: 12px; /* Smaller text for longer process names */
+  }
+
+  .step-circle {
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+  }
+
+  .sections {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .section {
+    width: 80%;
+    text-align: center;
   }
 }
